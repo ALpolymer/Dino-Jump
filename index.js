@@ -1,10 +1,13 @@
 const cactus = document.querySelector("#cactus")
 const dino = document.querySelector("#dino")
 const ground = document.querySelector("#ground")
+const start = document.querySelector(".start")
+const game = document.querySelector(".game")
 
 document.addEventListener("keydown", handleKeyPress)
 
 function handleKeyPress(e) {
+  start.innerHTML = " "
   move()
   jump(e)
 }
@@ -38,7 +41,7 @@ function isCrashed() {
 }
 function gameLoop() {
   if (isCrashed()) {
-    alert("Game Over!")
+    alert("Game Over! Click OK to play again!")
   }
 
   requestAnimationFrame(gameLoop)
