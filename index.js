@@ -1,6 +1,6 @@
 const cactus = document.querySelector("#cactus")
 const dino = document.querySelector("#dino")
-const ground = document.querySelector("#ground")
+const ground = document.querySelector(".ground")
 const start = document.querySelector(".start")
 const game = document.querySelector(".game")
 const scoreElement = document.querySelector("#score")
@@ -21,8 +21,12 @@ function handleKeyPress(e) {
 
 function move() {
   const moveClass = "move"
+
   if (!cactus.classList.contains(moveClass)) {
     cactus.classList.add(moveClass)
+  }
+  if (!ground.classList.contains('ground-move')) {
+    ground.classList.add('ground-move')
   }
 }
 
@@ -51,9 +55,9 @@ function isCrashed() {
   let cactusPosition = cactus.getBoundingClientRect()
 
   return (
-    dinoPosition.right - 25 > cactusPosition.left &&
-    dinoPosition.left < cactusPosition.right - 20 &&
-    dinoPosition.bottom - 20 > cactusPosition.top
+    dinoPosition.right - 25 > cactusPosition.left
+    && dinoPosition.bottom >= cactusPosition.top
+    && dinoPosition.left +20 < cactusPosition.right
   )
 }
 function gameLoop() {
@@ -84,6 +88,7 @@ function showGameOver() {
 
 function resetGame() {
   cactus.classList.remove("move")
+  ground.classList.remove('ground-move')
   start.innerHTML = "Press space to start the Game"
   score = 0
 }
