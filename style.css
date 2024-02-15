@@ -84,10 +84,17 @@ body {
 
 .dino {
   left: 50px;
+  transform: scale(-1, 1);
+  font-size: 8rem;
+  line-height: 1;
+  height: 110px;
+  border: 1px solid red;
 }
 
 .cactus {
   right: 20px;
+  line-height: 1;
+  border: 1px solid red;
 }
 
 .move {
@@ -105,7 +112,7 @@ body {
 }
 
 .jump {
-  animation: dino-jump ease 1s;
+  animation: dino-jump ease 1.5s;
 }
 
 @keyframes dino-jump {

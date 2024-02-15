@@ -47,7 +47,9 @@ function isAboveCactus() {
   const dinoPosition = dino.getBoundingClientRect()
   const cactusPosition = cactus.getBoundingClientRect()
 
-  return dinoPosition.right > cactusPosition.left
+  return (
+    dinoPosition.left + 20 < cactusPosition.right
+  ) 
 }
 
 function isCrashed() {
@@ -55,26 +57,26 @@ function isCrashed() {
   let cactusPosition = cactus.getBoundingClientRect()
 
   return (
-    dinoPosition.right - 25 > cactusPosition.left
+    dinoPosition.right - 40 > cactusPosition.left
     && dinoPosition.bottom >= cactusPosition.top
-    && dinoPosition.left +20 < cactusPosition.right
+    && dinoPosition.left + 40 < cactusPosition.right
   )
 }
 function gameLoop() {
   if (isCrashed()) {
+    
     score = 0
     showGameOver()
     resetGame()
   } else {
     if (isAboveCactus() && !isScored) {
       isScored = true
-      console.log("isScored", isScored)
-
-      score += 1
+      //console.log("isScored", isScored)
+      if ( cactus.classList.contains('move') ) score += 1
       scoreElement.textContent = `Score: ${score}`
     } else if (!isAboveCactus()) {
       isScored = false
-      console.log("isScored", isScored)
+      //console.log("isScored", isScored)
     }
   }
 
