@@ -30,13 +30,20 @@ function jump() {
   const jumpClass = "jump"
   if (!isJumping) {
     isJumping = true
-    isScored = false
+
     dino.classList.add(jumpClass)
     dino.addEventListener("animationend", () => {
       dino.classList.remove(jumpClass)
       isJumping = false
     })
   }
+}
+
+function isAboveCactus() {
+  const dinoPosition = dino.getBoundingClientRect()
+  const cactusPosition = cactus.getBoundingClientRect()
+
+  return dinoPosition.right > cactusPosition.left
 }
 
 function isCrashed() {
@@ -54,18 +61,34 @@ function gameLoop() {
     score = 0
     showGameOver()
     resetGame()
+  } else {
+    // Check if Dino is above the cactus
+    if (isAboveCactus() && !isScored) {
+      isScored = true
+      console.log("isScored", isScored)
+
+      // Increment the score and update the display
+      score += 1
+      scoreElement.textContent = `Score: ${score}`
+    } else if (!isAboveCactus()) {
+      // Reset the scoring flag if Dino is not above the cactus
+      isScored = false
+      console.log("isScored", isScored)
+    }
   }
 
   requestAnimationFrame(gameLoop)
 }
 
 function showGameOver() {
+  scoreElement.textContent = `Score: 0`
   alert("Game Over! Click OK to play again!")
 }
 
 function resetGame() {
   cactus.classList.remove("move")
   start.innerHTML = "Press space to start the Game"
+  score = 0
 }
 
 gameLoop()
