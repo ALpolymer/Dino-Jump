@@ -15,13 +15,25 @@ body {
   font-size: 4rem;
 }
 
+.game {
+  min-height: 50vh;
+  width: 100vw;
+  position: relative;
+}
+
+.score {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  font-size: 2rem;
+}
+
 .start {
   color: crimson;
   text-align: center;
-  margin-bottom: 10rem;
-
   transform: scale(1);
   animation: pulse 2s infinite;
+  margin-top: 7rem;
 }
 
 @keyframes pulse {
@@ -39,11 +51,6 @@ body {
     transform: scale(0.95);
     opacity: 1;
   }
-}
-
-.game {
-  width: 100vw;
-  position: relative;
 }
 
 .dino,
