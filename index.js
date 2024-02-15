@@ -3,6 +3,9 @@ const dino = document.querySelector("#dino")
 const ground = document.querySelector("#ground")
 const start = document.querySelector(".start")
 const game = document.querySelector(".game")
+const scoreElement = document.querySelector("#score")
+
+let score = 0
 
 document.addEventListener("keydown", handleKeyPress)
 
@@ -27,6 +30,9 @@ function jump(e) {
       dino.classList.remove(jumpClass)
     }, 500)
   }
+
+  score += 1
+  scoreElement.textContent = `Score: ${score}`
 }
 
 function isCrashed() {

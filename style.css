@@ -11,7 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  font-family: "Pixelify Sans", sans-serif;
+  font-family: "VT323", monospace;
   font-size: 4rem;
 }
 
@@ -21,7 +21,7 @@ body {
   position: relative;
 }
 
-.score {
+#score {
   position: absolute;
   top: 0;
   right: 1rem;
