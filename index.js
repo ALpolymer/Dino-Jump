@@ -41,10 +41,20 @@ function isCrashed() {
 }
 function gameLoop() {
   if (isCrashed()) {
-    alert("Game Over! Click OK to play again!")
+    showGameOver()
+    resetGame()
   }
 
   requestAnimationFrame(gameLoop)
+}
+
+function showGameOver() {
+  alert("Game Over! Click OK to play again!")
+}
+
+function resetGame() {
+  cactus.classList.remove("move")
+  start.innerHTML = "Press space to start the Game"
 }
 
 gameLoop()
