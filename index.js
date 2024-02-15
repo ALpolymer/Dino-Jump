@@ -1,10 +1,23 @@
-const cactus = document.querySelector("#cactus")
+//const cactus = document.querySelector("#cactus")
 const dino = document.querySelector("#dino")
 const ground = document.querySelector(".ground")
 const start = document.querySelector(".start")
 const game = document.querySelector(".game")
 const scoreElement = document.querySelector("#score")
+let cactus
 
+function generateCactus(notFirst) {
+  cactus = document.createElement('div')
+  cactus.innerHTML = '🌵'
+  cactus.id = 'cactus'
+  cactus.classList.add('cactus')
+  const randomHeight = Math.floor(Math.random() * 4) + 2
+  cactus.setAttribute('style', `font-size: ${randomHeight}rem`)
+  notFirst && cactus.classList.add('off-screen')
+  game.appendChild(cactus)
+}
+
+let isMoving = false
 let isJumping = false
 let isScored = false
 let score = 0
@@ -12,22 +25,16 @@ let score = 0
 document.addEventListener("keydown", handleKeyPress)
 
 function handleKeyPress(e) {
-  start.innerHTML = " "
-  move()
-  if (e.code === "Space" && !isJumping) {
-    jump()
-  }
+  start.innerHTML = ""
+  e.code === "Space" && isMoving && jump()
+  !isMoving && move()
 }
 
 function move() {
-  const moveClass = "move"
-
-  if (!cactus.classList.contains(moveClass)) {
-    cactus.classList.add(moveClass)
-  }
-  if (!ground.classList.contains('ground-move')) {
-    ground.classList.add('ground-move')
-  }
+  dino.classList.add('walk')
+  cactus.classList.add('move')
+  ground.classList.add('ground-move')
+  isMoving = true
 }
 
 function jump() {
@@ -53,8 +60,8 @@ function isAboveCactus() {
 }
 
 function isCrashed() {
-  let dinoPosition = dino.getBoundingClientRect()
-  let cactusPosition = cactus.getBoundingClientRect()
+  const dinoPosition = dino.getBoundingClientRect()
+  const cactusPosition = cactus.getBoundingClientRect()
 
   return (
     dinoPosition.right - 40 > cactusPosition.left
@@ -62,37 +69,41 @@ function isCrashed() {
     && dinoPosition.left + 40 < cactusPosition.right
   )
 }
+
 function gameLoop() {
+  !cactus && generateCactus(false)
+
+  if (cactus.getBoundingClientRect().right === ground.getBoundingClientRect().left) {
+    cactus.remove()
+    generateCactus(true)
+    cactus.classList.add('move')
+  }
+  
   if (isCrashed()) {
-    
-    score = 0
-    showGameOver()
+    alert(`Game Over! Your score is ${score}. Hit Enter to play again!`)
     resetGame()
   } else {
     if (isAboveCactus() && !isScored) {
       isScored = true
-      //console.log("isScored", isScored)
       if ( cactus.classList.contains('move') ) score += 1
       scoreElement.textContent = `Score: ${score}`
     } else if (!isAboveCactus()) {
       isScored = false
-      //console.log("isScored", isScored)
     }
   }
 
   requestAnimationFrame(gameLoop)
 }
 
-function showGameOver() {
-  scoreElement.textContent = `Score: 0`
-  alert("Game Over! Click OK to play again!")
-}
-
 function resetGame() {
-  cactus.classList.remove("move")
+  isMoving = false
+  cactus.remove()
+  dino.classList.remove('walk')
   ground.classList.remove('ground-move')
-  start.innerHTML = "Press space to start the Game"
   score = 0
+  scoreElement.textContent = 'Score: 0'
+  start.textContent = "Press space to start the Game"
+  generateCactus(false)
 }
 
 gameLoop()
