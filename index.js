@@ -47,6 +47,7 @@ function isCrashed() {
 }
 function gameLoop() {
   if (isCrashed()) {
+    score = 0
     showGameOver()
     resetGame()
   }
