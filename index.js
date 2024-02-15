@@ -5,6 +5,8 @@ const start = document.querySelector(".start")
 const game = document.querySelector(".game")
 const scoreElement = document.querySelector("#score")
 
+let isJumping = false
+let isScored = false
 let score = 0
 
 document.addEventListener("keydown", handleKeyPress)
@@ -12,7 +14,9 @@ document.addEventListener("keydown", handleKeyPress)
 function handleKeyPress(e) {
   start.innerHTML = " "
   move()
-  jump(e)
+  if (e.code === "Space" && !isJumping) {
+    jump()
+  }
 }
 
 function move() {
@@ -22,17 +26,17 @@ function move() {
   }
 }
 
-function jump(e) {
+function jump() {
   const jumpClass = "jump"
-  if (e.code === "Space" && !dino.classList.contains(jumpClass)) {
+  if (!isJumping) {
+    isJumping = true
+    isScored = false
     dino.classList.add(jumpClass)
-    setTimeout(() => {
+    dino.addEventListener("animationend", () => {
       dino.classList.remove(jumpClass)
-    }, 500)
+      isJumping = false
+    })
   }
-
-  score += 1
-  scoreElement.textContent = `Score: ${score}`
 }
 
 function isCrashed() {
