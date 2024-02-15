@@ -62,16 +62,13 @@ function gameLoop() {
     showGameOver()
     resetGame()
   } else {
-    // Check if Dino is above the cactus
     if (isAboveCactus() && !isScored) {
       isScored = true
       console.log("isScored", isScored)
 
-      // Increment the score and update the display
       score += 1
       scoreElement.textContent = `Score: ${score}`
     } else if (!isAboveCactus()) {
-      // Reset the scoring flag if Dino is not above the cactus
       isScored = false
       console.log("isScored", isScored)
     }
