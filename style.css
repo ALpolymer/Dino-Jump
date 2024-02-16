@@ -74,7 +74,7 @@ body {
   left: 0;
   width: 100%;
   height: 28px;
-  background-image: url("/assets/ground.png");
+  background-image: url("assets/ground.png");
   background-position: 0 0;
   background-repeat: repeat-x;
   z-index: -1;
