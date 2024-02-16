@@ -88,13 +88,11 @@ body {
   font-size: 8rem;
   line-height: 1;
   height: 110px;
-  border: 1px solid red;
 }
 
 .cactus {
   right: 20px;
   line-height: 1;
-  border: 1px solid red;
 }
 
 .off-screen {
@@ -132,7 +130,6 @@ body {
   }
 }
 
-
 .jump {
   animation: dino-jump ease 1.5s;
 }
@@ -150,4 +147,3 @@ body {
     margin-bottom: 0;
   }
 }
-
