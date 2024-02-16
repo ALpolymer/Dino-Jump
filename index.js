@@ -1,4 +1,3 @@
-//const cactus = document.querySelector("#cactus")
 const dino = document.querySelector("#dino")
 const ground = document.querySelector(".ground")
 const start = document.querySelector(".start")
