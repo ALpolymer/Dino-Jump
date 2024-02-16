@@ -29,6 +29,15 @@ body {
   text-shadow: #fc0 1px 0 10px;
 }
 
+#high-score {
+  position: absolute;
+  top: 2.5rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.285);
+  text-shadow: #fc0 1px 0 10px;
+}
+
 .start {
   color: crimson;
   text-align: center;

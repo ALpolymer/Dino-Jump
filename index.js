@@ -4,6 +4,7 @@ const ground = document.querySelector(".ground")
 const start = document.querySelector(".start")
 const game = document.querySelector(".game")
 const scoreElement = document.querySelector("#score")
+const highScoreElement = document.querySelector("#high-score")
 let cactus
 
 function generateCactus(notFirst) {
@@ -21,6 +22,7 @@ let isMoving = false
 let isJumping = false
 let isScored = false
 let score = 0
+let highScore = 0
 
 document.addEventListener("keydown", handleKeyPress)
 
@@ -86,7 +88,14 @@ function gameLoop() {
     if (isAboveCactus() && !isScored) {
       isScored = true
       if (cactus.classList.contains("move")) score += 1
+      if (score > highScore) {
+        highScore = score
+      }
+
       scoreElement.textContent = `Score: ${score}`
+      console.log("score", score)
+      console.log("highScore", highScore)
+      highScoreElement.textContent = `High Score: ${highScore}`
     } else if (!isAboveCactus()) {
       isScored = false
     }
