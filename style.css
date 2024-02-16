@@ -19,6 +19,8 @@ body {
   min-height: 50vh;
   width: 1024px;
   position: relative;
+  z-index: -2;
+  overflow: hidden;
 }
 
 #score {
@@ -64,7 +66,6 @@ body {
 .dino,
 .cactus {
   position: absolute;
-  bottom: 10px;
   width: fit-content;
 }
 .ground {
@@ -80,7 +81,8 @@ body {
 }
 
 .ground-move {
-  animation: animatedBackground 10s linear infinite;
+  animation: animatedBackground linear infinite;
+  animation-fill-mode: forwards;
 }
 
 @keyframes animatedBackground {
@@ -107,25 +109,23 @@ body {
   font-size: 8rem;
   line-height: 1;
   height: 110px;
+  bottom: 10px;
 }
 
 .cactus {
-  right: 20px;
+  right: -12%;
   line-height: 1;
-}
-
-.off-screen {
-  right: 0;
+  bottom: 5px;
 }
 
 .move {
-  animation: cactus-move 4.27s linear;
+  animation: cactus-move linear;
   animation-fill-mode: forwards;
 }
 
 @keyframes cactus-move {
   0% {
-    right: 0;
+    right: -12%;
   }
   100% {
     right: 100%;
@@ -149,7 +149,7 @@ body {
 }
 
 .jump {
-  animation: dino-jump ease 1.5s;
+  animation: dino-jump ease;
 }
 
 @keyframes dino-jump {
