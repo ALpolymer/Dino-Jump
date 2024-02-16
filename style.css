@@ -25,7 +25,8 @@ body {
   position: absolute;
   top: 0;
   right: 1rem;
-  font-size: 2rem;
+  font-size: 3rem;
+  text-shadow: #fc0 1px 0 10px;
 }
 
 .start {
@@ -80,6 +81,15 @@ body {
   100% {
     background-position: -2399px 0;
   }
+}
+
+.sun {
+  position: fixed;
+  bottom: 30rem;
+  left: 20rem;
+  font-size: 8rem;
+
+  animation: pulse 5s infinite ease-in-out;
 }
 
 .dino {
