@@ -111,7 +111,8 @@ function resetGame() {
   ground.classList.remove("ground-move")
   score = 0
   scoreElement.textContent = "Score: 0"
-  start.textContent = "Press space to start the Game"
+  start.textContent =
+    "Press any key to start the Game and then Space to jump!!!"
   generateCactus(false)
 }
 
