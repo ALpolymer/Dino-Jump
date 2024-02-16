@@ -7,7 +7,7 @@
 - Robust High Score system to challenge and motivate players.
 - Increasing difficulty levels as players advance through the game.
 
-### instructions:
+### Ιnstructions:
 When the game renders:
 - press any key to start.
 - press space to jump.
