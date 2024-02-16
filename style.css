@@ -67,6 +67,7 @@ body {
 .cactus {
   position: absolute;
   bottom: 10px;
+  width: fit-content;
 }
 .ground {
   position: absolute;
@@ -77,6 +78,7 @@ body {
   background-image: url("/assets/ground.png");
   background-position: 0 0;
   background-repeat: repeat-x;
+  z-index: -1;
 }
 
 .ground-move {
@@ -97,7 +99,7 @@ body {
   bottom: 60vh;
   left: 50vh;
   font-size: 8rem;
-
+  z-index: -1;
   animation: pulse 5s infinite ease-in-out;
 }
 
@@ -165,4 +167,8 @@ body {
   100% {
     margin-bottom: 0;
   }
+}
+
+.paused {
+  animation-play-state: paused;
 }

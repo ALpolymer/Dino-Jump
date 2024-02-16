@@ -9,11 +9,17 @@ let cactus
 
 function generateCactus(notFirst) {
   cactus = document.createElement("div")
-  cactus.innerHTML = "🌵"
+  // Comment out the next two lines to cancel the 2 cactus generation
+  const randomCactus = Math.floor(Math.random() * 2)
+  const randomHeight = Math.floor(Math.random() * 4) + 2
+  cactus.innerHTML = randomCactus === 1 && randomHeight !== 5 ? "🌵🌵" : "🌵"
+  // Open the line below if you commented out the two lines above
+  //cactus.innerHTML = "🌵"
   cactus.id = "cactus"
   cactus.classList.add("cactus")
-  const randomHeight = Math.floor(Math.random() * 4) + 2
-  cactus.setAttribute("style", `font-size: ${randomHeight}rem`)
+  cactus.setAttribute("style", `font-size: ${randomHeight}rem; animation-duration: ${4.27 / gameSpeed}s`)
+  console.log(cactus.getAttribute('style'))
+  console.log(gameSpeed)
   notFirst && cactus.classList.add("off-screen")
   game.appendChild(cactus)
 }
@@ -23,20 +29,37 @@ let isJumping = false
 let isScored = false
 let score = 0
 let highScore = 0
+let gameSpeed = 1
 
 document.addEventListener("keydown", handleKeyPress)
 
 function handleKeyPress(e) {
-  start.innerHTML = ""
+  e.key === 'Escape' && isMoving && pause()
   e.code === "Space" && isMoving && jump()
-  !isMoving && move()
+  e.key !== 'Escape' && !isMoving && move()
 }
 
 function move() {
+  start.innerHTML = ""
   dino.classList.add("walk")
   cactus.classList.add("move")
   ground.classList.add("ground-move")
+
+  if ( dino.classList.contains('paused') ) {
+    dino.classList.remove('paused')
+    cactus.classList.remove('paused')
+    ground.classList.remove('paused')
+  }
+  
   isMoving = true
+}
+
+function pause() {
+  start.innerHTML = "Paused"
+  dino.classList.add('paused')
+  cactus.classList.add('paused')
+  ground.classList.add('paused')
+  isMoving = false
 }
 
 function jump() {
@@ -77,8 +100,11 @@ function gameLoop() {
     cactus.getBoundingClientRect().right === ground.getBoundingClientRect().left
   ) {
     cactus.remove()
+    gameSpeed = score === 0 ? 1 : (score * 0.1) + 1
     generateCactus(true)
     cactus.classList.add("move")
+    ground.setAttribute('style', `animation-duration: ${10 / gameSpeed}s`)
+    dino.setAttribute('style', `animation-duration: ${1.5 / gameSpeed}s`)
   }
 
   if (isCrashed()) {
@@ -110,9 +136,12 @@ function resetGame() {
   dino.classList.remove("walk")
   ground.classList.remove("ground-move")
   score = 0
+  gameSpeed = 1
+  ground.removeAttribute('style')
+  dino.removeAttribute('style')
   scoreElement.textContent = "Score: 0"
   start.textContent =
-    "Press any key to start the Game and then Space to jump!!!"
+    "Press any key to start. Press Escape to pause. Press Space to jump!"
   generateCactus(false)
 }
 
