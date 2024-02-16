@@ -94,8 +94,8 @@ body {
 
 .sun {
   position: fixed;
-  bottom: 30rem;
-  left: 20rem;
+  bottom: 60vh;
+  left: 50vh;
   font-size: 8rem;
 
   animation: pulse 5s infinite ease-in-out;
