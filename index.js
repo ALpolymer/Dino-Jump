@@ -26,12 +26,9 @@ function handleKeyPress(e) {
 
 function generateCactus() {
   cactus = document.createElement("div")
-  // Comment out the next two lines to cancel the 2 cactus generation
   const randomCactus = Math.floor(Math.random() * 2)
   const randomHeight = Math.floor(Math.random() * 4) + 2
-  cactus.innerHTML = randomCactus === 1 && randomHeight !== 5 ? "🌵🌵" : "🌵"
-  // Open the line below if you commented out the two lines above
-  //cactus.innerHTML = "🌵"
+  cactus.textContent = randomCactus === 1 && randomHeight !== 5 ? "🌵🌵" : "🌵"
   cactus.id = "cactus"
   cactus.classList.add("cactus")
   cactus.setAttribute("style", `font-size: ${randomHeight}rem; animation-duration: ${cactusSpeed / gameSpeed}s`)
@@ -41,7 +38,7 @@ function generateCactus() {
 }
 
 function move() {
-  start.innerHTML = ""
+  start.textContent = ""
   dino.classList.add("walk")
   cactus.classList.add("move")
   ground.classList.add("ground-move")
@@ -56,7 +53,7 @@ function move() {
 }
 
 function pause() {
-  start.innerHTML = "Paused"
+  start.textContent = "Paused"
   dino.classList.add('paused')
   cactus.classList.add('paused')
   ground.classList.add('paused')
