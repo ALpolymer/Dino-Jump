@@ -2,7 +2,7 @@
 
 A simple jumping game in which the player jumps over obstacles.
 
-[Live demo](https://elal3k.github.io/Dino-Jump/)
+[Live demo](https://alpolymer.github.io/Dino-Jump/)
 
 
 ![Screensot](/assets/screenshot.png)
